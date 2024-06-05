@@ -1,0 +1,42 @@
+@startuml
+<style>
+    title {
+      HorizontalAlignment center
+      FontSize 18
+      padding 20
+    }
+</style>
+
+'Doubts: Should communication between components be verbose?
+title Use Case - Add an Actuator to Device\nProcess View Level 3 - Backend Interaction \n Main Success Scenario
+autonumber
+
+participant "**<<component (C4)>>**\nServer" as SERVER
+participant "**<<component (C4)>>**\nDatabase" as DB
+
+[o-> SERVER : Add a new actuator, with this\ninformation, to this device
+activate SERVER
+
+SERVER -> DB: Verify if device exists
+activate DB
+DB --> SERVER: Send validation
+deactivate DB
+|||
+SERVER -> SERVER : Verify if device is active
+|||
+SERVER -> DB: Verify if actuator type exists
+activate DB
+DB --> SERVER: Send validation
+deactivate DB
+|||
+SERVER -> SERVER : Create new actuator
+|||
+SERVER -> DB : Save actuator
+activate DB
+DB --> SERVER : Send validation
+deactivate DB
+
+[o<-- SERVER : Successful Operation.\nRetrieve actuator information
+deactivate SERVER
+
+@enduml

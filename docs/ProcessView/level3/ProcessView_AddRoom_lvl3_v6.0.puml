@@ -1,0 +1,34 @@
+@startuml
+
+title Use Case - Add a Room to the House\nProcess View Level 3 - Backend Interaction \n Main Success Scenario
+autonumber
+<style>
+    title {
+      HorizontalAlignment center
+      FontSize 18
+      padding 20
+    }
+</style>
+
+participant "**<<component (C4)>>**\nServer" as SERVER
+participant "**<<component (C4)>>**\nDatabase" as DB
+
+[o-> SERVER : Add a new room with this information
+activate SERVER
+
+SERVER -> DB: Get persisted house
+activate DB
+DB --> SERVER: Retrieve house
+deactivate DB
+|||
+SERVER -> SERVER : Create new room
+|||
+SERVER -> DB : Save room
+activate DB
+DB --> SERVER : Send validation
+deactivate DB
+
+[o<-- SERVER : Successful Operation.\nRetrieve room information
+deactivate SERVER
+
+@enduml

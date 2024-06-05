@@ -1,0 +1,14 @@
+@startuml
+
+title Use Case - Add an Actuator to Device\nProcess View Level 2\n Success Scenario
+autonumber
+
+participant "**<<container (C4)>>**\nBackend" as BE
+
+[o-> BE : Add a new actuator, with this \ninformation, to this device
+activate BE
+[o<-- BE : The actuator was added
+deactivate BE
+
+
+@enduml

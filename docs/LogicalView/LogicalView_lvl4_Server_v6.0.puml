@@ -1,0 +1,114 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+title Logical View - Code Backend Server (Level 4)
+
+
+' Define outer interfaces
+interface "Rest API" as RestAPI
+'interface "External Service API" as ExternalServiceAPI
+interface "JPA API" as JPAAPI
+'interface "Weather API" as WeatherAPI
+'interface "Smart Device API" as SmartDeviceAPI
+
+' Define the main component
+component "BackEnd Server" <<component>> as BE {
+    port " " as OuterPortRestAPI
+    port " " as OuterPortJPAAPI
+'    port " " as OuterPortExternalServiceAPI
+'    port " " as OuterPortInternalWeatherServiceAPI
+'    port " " as OuterPortSmartDeviceAPI
+
+    component "DataModel" <<component>>
+    component "DTO" <<component>>
+
+    package "Framework and Drivers Layer" as P1 {
+        component "Routing" <<component>>
+        component "Persistence" <<component>>
+ '       component "Weather Gateway" <<component>>
+ '       component "Smart Device Gateway" <<component>>
+    }
+
+    package "Interface Adapters Layer" as P2 {
+        component "Controller" <<component>>
+        component "Repository" <<component>>
+  '      component "Weather Manager" <<component>>
+  '      component "Smart Device Manager" <<component>>
+    }
+
+    package "Application Business Rules Layer" as P3 {
+        component "Application Service" <<component>>
+    }
+
+    package "Enterprise Business Rules Layer" as P4 {
+        component "Domain Model" <<component>>
+    }
+
+    ' Define internal interfaces
+    interface "Controller REST API" as ControllerAPI
+    interface "Controller CLI API" as ControllerCLIAPI
+    interface "DataModel API" as DataModelAPI
+    interface "Persistence API" as PersistenceAPI
+'    interface "Weather Gateway API" as WeatherGatewayAPI
+'    interface "Smart Device Gateway API" as SmartDeviceGatewayAPI
+    interface "Domain API" as DomainAPI
+    interface "Application Service API" as ApplicationServiceAPI
+    interface "DTO API" as DTOAPI
+    interface "Repository API" as RepositoryAPI
+ '   interface "Weather Service API" as WeatherServiceAPIInternal
+ '   interface "Smart Device Manager API" as SmartDeviceManagerAPI
+}
+
+
+' Outer port connections
+OuterPortRestAPI -up- RestAPI
+'OuterPortExternalServiceAPI -up-( ExternalServiceAPI
+OuterPortJPAAPI -up-( JPAAPI
+'OuterPortInternalWeatherServiceAPI -up-( WeatherAPI
+'OuterPortSmartDeviceAPI -up-( SmartDeviceAPI
+
+' Connecting framework and drivers layers to outer ports
+OuterPortRestAPI -down-- "Routing"
+OuterPortJPAAPI -down-- "Persistence"
+'OuterPortExternalServiceAPI -down-- "Weather Gateway"
+'OuterPortInternalWeatherServiceAPI -down- "Weather Gateway"
+'OuterPortSmartDeviceAPI -down- "Smart Device Gateway"
+
+' Connecting framework and drivers layer to interface layer APIs
+"Routing" -down--( ControllerAPI
+"Routing" --( DTOAPI
+"DataModel" -down- DataModelAPI
+"Persistence" -down--( DataModelAPI
+"Persistence" -down-- PersistenceAPI
+'"Weather Gateway" -down-- WeatherGatewayAPI
+'"Smart Device Gateway" -down-- SmartDeviceGatewayAPI
+
+' Connecting interface adapter layer to their APIs
+"Controller" -up- ControllerAPI
+"Controller" -up- ControllerCLIAPI
+"Repository" -down- RepositoryAPI
+"Repository" -up-( DataModelAPI
+"Repository" -up-( PersistenceAPI
+'"Weather Manager" -up-( WeatherGatewayAPI
+'"Smart Device Manager" -up-( SmartDeviceGatewayAPI
+
+' Connecting interface adapter layer to application business rules APIs
+"DTO" -left- DTOAPI
+"Controller" --( ApplicationServiceAPI
+"Controller" --( DTOAPI
+"Repository" -down--( DomainAPI
+'"Weather Manager" -down-- WeatherServiceAPIInternal
+'"Smart Device Manager" -down-- SmartDeviceManagerAPI
+
+' Connecting application business rules components APIs
+ApplicationServiceAPI -down- "Application Service"
+'"Application Service" -up-( SmartDeviceManagerAPI
+'"Application Service" -up-( WeatherServiceAPIInternal
+"Application Service" -left-( DomainAPI
+"Application Service" -up-( RepositoryAPI
+
+' Connecting Domain model to its API
+"Domain Model" -up--- DomainAPI
+
+
+@enduml

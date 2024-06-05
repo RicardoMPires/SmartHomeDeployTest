@@ -1,0 +1,24 @@
+@startuml
+title : Physical View - Level 2
+
+node " " as N4  {
+  [HTTP Server]
+  '[Front-end]
+}
+
+node "localhost: 8080" as Localhost  {
+  component "Browser" as Browser  {
+    '[Front-End]
+  }
+  [Client HTTP]
+}
+
+node " " as N3 {
+  [Back-end]
+  '[Weather Service]
+}
+
+N4 -- Localhost : http/s
+Localhost -- N3 : http/s
+
+@enduml

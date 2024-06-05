@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Use Case - List All Device Measurements in a Given Period \nProcess View Level 2 \n Success Scenario
+autonumber
+
+participant "**<<container (C4)>>**\nBackend" as BE
+
+[o-> BE : List all measurements \nof this device in this time period
+activate BE
+[o<-- BE : Provide a list of all device \nreadings in the selected period
+deactivate BE
+
+
+
+
+
+@enduml

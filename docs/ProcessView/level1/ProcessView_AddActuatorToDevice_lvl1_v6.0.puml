@@ -1,0 +1,21 @@
+@startuml
+
+title Use Case - Add an Actuator to Device\nProcess View Level 1\n Success Scenario
+autonumber
+
+actor "Power User/\nAdministrator" as A
+participant "**<<system (C4)>>**\nSmartHome" as AH
+
+
+A -> AH : I want to add a new actuator to a device
+activate A
+activate AH
+AH --> A : Request actuator data and device ID
+deactivate AH
+A -> AH : Provide actuator data and device ID
+activate AH
+AH --> A : The actuator was added
+deactivate AH
+deactivate A
+
+@enduml

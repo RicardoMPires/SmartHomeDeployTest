@@ -1,0 +1,14 @@
+@startuml
+
+title Use Case - Get Maximum Temperature Difference Between an Outdoor \nand Indoor Device in a Given Period \nProcess View Level 2\nSuccess Scenario
+autonumber
+
+participant "**<<container (C4)>>**\nBackend" as BE
+
+[o-> BE : Get the maximum instantaneous temperature \ndifference between these outdoor and indoor \ndevices, in this time period
+activate BE
+
+[o<-- BE : Provide the maximum instantaneous \ temperature \ndifference verified in the selected time period
+deactivate BE
+
+@enduml

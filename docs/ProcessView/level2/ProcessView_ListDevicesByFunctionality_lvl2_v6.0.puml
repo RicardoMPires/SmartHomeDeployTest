@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Use Case - List Devices Grouped By Functionality \nProcess View Level 2 \nSuccess Scenario
+autonumber
+
+participant "**<<container (C4)>>**\nBackend" as BE
+
+[o-> BE : List all devices grouped \nby functionality
+activate BE
+[o<-- BE : Return list of devices \ngrouped by functionality
+deactivate BE
+
+
+@enduml

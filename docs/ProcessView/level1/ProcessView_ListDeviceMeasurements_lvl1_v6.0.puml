@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Use Case - List All Device Measurements in a Given Period \nProcess View Level 1 \n Success Scenario
+autonumber
+
+actor "Room Owner" as RO
+participant "**<<system (C4)>>**\nSmartHome" as SH
+
+RO -> SH : I want to know the device readings
+activate RO
+activate SH
+SH --> RO : Request device ID and time period
+deactivate SH
+RO -> SH : Provide device ID and time period
+activate SH
+SH --> RO : Provide a list of all device \nreadings in the selected period
+deactivate SH
+deactivate RO
+
+
+
+
+
+@enduml

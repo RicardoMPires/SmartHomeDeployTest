@@ -1,0 +1,36 @@
+@startuml
+<style>
+    title {
+      HorizontalAlignment center
+      FontSize 18
+      padding 20
+    }
+</style>
+
+'Doubts: Should communication between components be verbose?
+title Use Case - List Existing Devices in a Room \nProcess View Level 3 \
+- Backend Interaction \n Main Success Scenario
+autonumber
+
+participant "**<<component (C4)>>**\nServer" as SERVER
+participant "**<<component (C4)>>**\nDatabase" as DB
+
+[o-> SERVER : List all devices in this room
+activate SERVER
+
+SERVER -> DB: Verify if room exists
+activate DB
+DB --> SERVER: Send validation
+deactivate DB
+|||
+SERVER -> DB: Request all devices in the room
+activate DB
+DB --> SERVER: Retrieve devices
+deactivate DB
+
+
+[o<-- SERVER : Successful Operation.\nRetrieve information \
+ of all \ndevices in the selected room
+deactivate SERVER
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+title Use Case - Configure the Location of the House \nProcess View Level 2 \nSuccess Scenario
+autonumber
+
+participant "<<**container (C4)**>>\nBackend" as BE
+
+[o-> BE : I want to configure the house location
+activate BE
+[o<-- BE : The house location was updated
+deactivate BE
+
+
+@enduml

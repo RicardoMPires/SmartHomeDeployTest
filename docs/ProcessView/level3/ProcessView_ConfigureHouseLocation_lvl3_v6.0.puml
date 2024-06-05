@@ -1,0 +1,35 @@
+@startuml
+<style>
+    title {
+      HorizontalAlignment center
+      FontSize 18
+      padding 20
+    }
+</style>
+
+title Use Case - Configure the Location of the House \nProcess View Level 3 - Backend Interaction \n Main Success Scenario
+
+autonumber
+
+participant "**<<component (C4)>>**\nServer" as SERVER
+participant "**<<component (C4)>>**\nDatabase" as DB
+
+[o-> SERVER : Configure the house with this location
+activate SERVER
+
+SERVER -> DB: Get persisted house
+activate DB
+DB --> SERVER: Retrieve house
+deactivate DB
+|||
+SERVER -> SERVER : Update house location
+|||
+SERVER -> DB : Save updated house
+activate DB
+DB --> SERVER : Send validation
+deactivate DB
+
+[o<-- SERVER : Successful Operation.\nRetrieve updated house information
+deactivate SERVER
+
+@enduml

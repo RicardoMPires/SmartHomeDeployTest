@@ -1,0 +1,21 @@
+@startuml
+
+autonumber
+title Use Case - Deactivate a Device\nProcess View Level 1 \nSuccess Scenario
+
+actor "Power User/Administrator" as PU
+participant "**<<system (C4)>>**\nSmartHome" as SH
+
+
+PU -> SH: I want to deactivate a device
+activate PU
+activate SH
+SH --> PU: Request device ID
+deactivate SH
+PU -> SH: Provide device ID
+activate SH
+SH --> PU: The device was deactivated
+deactivate SH
+deactivate PU
+
+@enduml

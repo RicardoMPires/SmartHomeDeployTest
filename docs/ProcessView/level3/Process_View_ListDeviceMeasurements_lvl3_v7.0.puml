@@ -1,0 +1,36 @@
+@startuml
+<style>
+    title {
+      HorizontalAlignment center
+      FontSize 18
+      padding 20
+    }
+</style>
+
+title Use Case - List All Device Measurements \nProcess View Level 3 - Backend Interaction \n Main Success Scenario
+autonumber
+
+participant "**<<component (C4)>>**\nServer" as SERVER
+participant "**<<component (C4)>>**\nDatabase" as DB
+
+[o-> SERVER : **List all measurements of this device** \nin this time period (optional)
+activate SERVER
+alt time period specified
+SERVER -> SERVER : Verify if time period is valid
+activate SERVER
+deactivate SERVER
+|||
+SERVER -> DB: Get all of this device logs in this time period
+
+else time period not specified
+SERVER -> DB: Get all of this device logs
+end
+activate DB
+DB --> SERVER: Retrieve device logs list
+deactivate DB
+
+[o<-- SERVER : Successful Operation.\nRetrieve device logs information
+deactivate SERVER
+
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+autonumber
+title Use Case - Deactivate a Device\nProcess View Level 2 \nSuccess Scenario
+
+participant "**<<container (C4)>>**\nBackend" as BE
+
+
+[o-> BE: Deactivate this device
+activate BE
+[o<-- BE: The device was deactivated
+deactivate BE
+
+@enduml

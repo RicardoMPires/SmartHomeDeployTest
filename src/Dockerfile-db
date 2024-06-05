@@ -1,0 +1,13 @@
+# Use the official MariaDB image as the base
+FROM mariadb:latest
+
+# Set environment variables for MariaDB
+ENV MYSQL_ROOT_PASSWORD=your_root_password
+ENV MYSQL_DATABASE=SmartHome
+ENV MYSQL_USER=smarthome
+ENV MYSQL_PASSWORD=smarthome
+
+# Expose the MariaDB port
+EXPOSE 3306
+
+# When a container is run from this image, the MariaDB server will start automatically

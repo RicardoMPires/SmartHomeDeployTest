@@ -1,0 +1,40 @@
+@startuml
+<style>
+    title {
+      HorizontalAlignment center
+      FontSize 18
+      padding 20
+    }
+</style>
+
+'Doubts: Should communication between components be verbose?
+title Use Case - Get the Peak Power Consumption of the House in a Given Period\nProcess View Level 3 - Backend Interaction \n Main Success Scenario
+autonumber
+
+participant "**<<component (C4)>>**\nServer" as SERVER
+participant "**<<component (C4)>>**\nDatabase" as DB
+
+[o-> SERVER : Get the peak power consumption of the house \nin this time period, allowing this offset precision \nfor log comparison
+activate SERVER
+
+SERVER -> SERVER : Verify if time period is valid
+|||
+SERVER -> DB: Get house power meter \nlogs, in the given time period
+activate DB
+DB --> SERVER: Retrieve power meter logs
+deactivate DB
+|||
+SERVER -> DB: Get power source logs \nin the given time period
+note right : **This step is repeated as many times as** \n**the number of existent power sources**
+activate DB
+DB --> SERVER: Retrieve power source logs
+deactivate DB
+|||
+SERVER -> SERVER : Compute device logs, considering the \nallowed \
+offset, to get the peak power consumption
+
+
+[o<-- SERVER : Successful Operation. \nRetrieve the peak power consumption \nof the house in the selected period
+deactivate SERVER
+
+@enduml

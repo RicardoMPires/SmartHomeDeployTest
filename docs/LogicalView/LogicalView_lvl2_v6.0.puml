@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+title Logical View - Container (Level 2)
+
+left to right direction
+
+component "SmartHome" <<component>> {
+portin " " as PortRestAPI
+'portin " " as PortWeatherServiceAPI
+'portin " " as PortWebAPI
+'portout " " as outSystemPortWeatherService
+'portout " " as outPortSmartDevice
+
+
+
+    component "BackEnd" <<container>>{
+    portin " " as BERestAPI
+'    portin " " as CLIAPI
+'   portout " " as BEinternalWeatherServiceAPI
+'   portout " " as BEexternalWeatherServiceAPI
+    }
+
+'    component "FrontEnd" <<container>>{
+'    portin " " as FEexternalWebAPI
+'    portout " " as FEinternalRestAPI
+'    }
+
+'interface "Internal \nWS API"
+ '   component "Weather \nService" <<container>>{
+  '  portin " " as PortexternalWeatherServiceAPI
+   ' portin " " as PortinternalWeatherServiceAPI
+    'portout " " as outPortWeatherService
+    '}
+
+interface "Internal \nBE Rest API"
+'interface "CLI API"
+}
+
+
+'Connecting the container ports with the system component ports
+
+'FEexternalWebAPI - PortWebAPI
+'PortWeatherServiceAPI - PortexternalWeatherServiceAPI
+'BEexternalWeatherServiceAPI - outSystemPortWeatherService
+
+'BEexternalWeatherServiceAPI - outPortSmartDevice
+PortRestAPI --( "Internal \nBE Rest API"
+
+
+'outSystemPortWeatherService -right- outPortWeatherService
+'PortinternalWeatherServiceAPI -u- "Internal \nWS API"
+
+' Connecting the containers
+'BEinternalWeatherServiceAPI --( "Internal \nWS API"
+'FEinternalRestAPI --( "Internal \nBE Rest API"
+"Internal \nBE Rest API" -- BERestAPI
+'CLIAPI -u- "CLI API"
+
+'Connecting to the outside layer
+PortRestAPI -u- "Rest API"
+'PortWeatherServiceAPI -u- "Weather\nService\nAPI"
+'PortWebAPI -u- "Web API"
+
+'outSystemPortWeatherService -up-( "External \nService"
+'outPortSmartDevice ---up( "Smart Device"
+
+}
+@enduml

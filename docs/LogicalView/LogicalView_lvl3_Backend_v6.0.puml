@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+title Logical View - Level 3
+
+component "BackEnd" <<container>> as BE{
+component "Database" <<component>> as DATA{
+}
+component "<<component>>\nServer" as SERV{
+'    portin " " as CLIAPI
+    portin " " as RestAPI
+}
+portin " " as P1
+'portin " " as P5
+'portin " " as P2
+'portout " " as P3
+'portin " " as P4
+
+interface "JPA API" as DATAAPI
+}
+
+P1 -- RestAPI
+P1 -u- "Rest API"
+'P5 -u- "CLI API"
+'P5 -- CLIAPI
+'P2 -u- "WeatherServices API"
+'P3 -r- "Frontend API"
+'P4 -u- "Hardware\nSmarthome API"
+
+SERV --( DATAAPI
+DATA -l- DATAAPI
+
+
+'P2 -- SERV
+'SERV -- P3
+'P4 -- SERV
+
+
+
+@enduml
+

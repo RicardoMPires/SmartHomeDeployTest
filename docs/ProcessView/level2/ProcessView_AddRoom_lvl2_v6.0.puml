@@ -1,0 +1,14 @@
+@startuml
+
+title Use Case - Add a Room to the House\nProcess View Level 2\n Success Scenario
+autonumber
+
+participant "**<<container (C4)>>**\nBackend" as BE
+
+[o-> BE: Add a new room to the house \nwith this information
+activate BE
+[o<-- BE : The room was added
+deactivate BE
+
+
+@enduml

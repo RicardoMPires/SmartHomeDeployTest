@@ -1,0 +1,16 @@
+@startuml
+
+title Use Case - Add a Sensor to Device\nProcess View Level 2 \nSuccess Scenario
+autonumber
+
+participant "**<<container (C4)>>**\nBackend" as BE
+
+[o-> BE : Add a sensor to a device
+activate BE
+
+[o<-- BE : The sensor was added
+deactivate BE
+
+
+
+@enduml

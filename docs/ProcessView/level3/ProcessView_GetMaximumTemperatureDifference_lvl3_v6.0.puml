@@ -1,0 +1,66 @@
+@startuml
+<style>
+    title {
+      HorizontalAlignment center
+      FontSize 18
+      padding 20
+    }
+</style>
+
+'Doubts: Should communication between components be verbose?
+title Use Case - Get Maximum Temperature Difference Between an Outdoor and Indoor Device in a Given Period \nProcess View Level 3 - Backend Interaction \n Main Success Scenario
+autonumber
+
+participant "**<<component (C4)>>**\nServer" as SERVER
+participant "**<<component (C4)>>**\nDatabase" as DB
+
+[o-> SERVER : Get the maximum instantaneous temperature verified\n  between \
+this two devices, during this time period,\n and allowing this offset precision \
+for log comparison
+activate SERVER
+
+SERVER -> DB: Find outdoor device
+activate DB
+DB --> SERVER: Retrieve outdoor device
+deactivate DB
+|||
+SERVER -> DB: Find outdoor device location
+activate DB
+DB --> SERVER: Retrieve room
+deactivate DB
+|||
+SERVER -> SERVER: Verify if is an outdoor room
+|||
+SERVER -> DB: Find indoor device
+activate DB
+DB --> SERVER: Retrieve indoor device
+deactivate DB
+|||
+SERVER -> DB: Find indoor device location
+activate DB
+DB --> SERVER: Retrieve room
+deactivate DB
+|||
+SERVER -> SERVER: Verify if is an indoor room
+|||
+SERVER -> SERVER : Verify if time period is valid
+|||
+SERVER -> DB: Get outdoor device logs in time period
+activate DB
+DB --> SERVER: Retrieve logs
+deactivate DB
+|||
+SERVER -> DB: Get indoor device logs in time period
+activate DB
+DB --> SERVER: Retrieve logs
+deactivate DB
+|||
+SERVER -> SERVER : Compute device logs, considering the \nallowed \
+ offset, to get  the maximum \ninstantaneous temperature
+
+
+[o<-- SERVER : Successful Operation.\nRetrieve the maximum instantaneous \
+temperature \ndifference verified in the selected time period
+deactivate SERVER
+
+@enduml

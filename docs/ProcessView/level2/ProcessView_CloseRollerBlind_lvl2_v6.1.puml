@@ -1,0 +1,14 @@
+@startuml
+
+title Use Case - Close a Roller Blind\n Process View Level 2\n Success Scenario
+autonumber
+
+participant "**<<container (C4)>>**\nBackend" as BE
+
+
+[o-> BE : Use this actuator ID to close a roller blind
+activate BE
+[o<-- BE : The roller blind was closed
+deactivate BE
+
+@enduml
