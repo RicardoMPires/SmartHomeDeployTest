@@ -155,6 +155,22 @@
     </dependencies>
 
     <build>
+        <resources>
+            <!-- Include properties files from the root directory -->
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>*.properties</include>
+                </includes>
+            </resource>
+            <!-- Include all files from the src/main/resources directory -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <!-- Required for running unit tests -->
             <plugin>
