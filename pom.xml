@@ -257,6 +257,7 @@
             </plugin>
 
         </plugins>
+        <finalName>smarthome</finalName>
     </build>
 
 </project>
