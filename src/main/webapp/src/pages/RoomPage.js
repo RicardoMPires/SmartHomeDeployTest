@@ -11,7 +11,7 @@ export default function Room() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/rooms')
+        fetch('http://http://10.9.24.206:8080/smarthome/rooms')
             .then(response => response.json())
             .then(data => {
                 if (data._embedded && data._embedded.roomDTOList) {

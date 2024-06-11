@@ -7,7 +7,7 @@ const House = (props) => {
     const [houseState, setHouseState] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:8080/house')
+        fetch('http://http://10.9.24.206:8080/smarthome/house')
             .then(response => response.json())
             .then(data => setHouseState(data))
             .catch(err => console.log(err))
