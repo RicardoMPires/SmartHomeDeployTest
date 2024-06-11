@@ -1,0 +1,31 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-web
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  fe:
+    build:
+      context: ./src/main/webapp
+      dockerfile: Dockerfile-fe
+    ports:
+      - "5000:5000"
+    depends_on:
+      - web
+
+  db:
+    build:
+      context: ./src
+      dockerfile: Dockerfile-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: SmartHome
+      MYSQL_USER: smarthome
+      MYSQL_PASSWORD: smarthome

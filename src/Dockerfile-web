@@ -1,7 +1,39 @@
-FROM tomcat:10.1.24-jdk17-temurin-jammy
+# Use the official maven image as the base image
+FROM maven:3.8.4-openjdk-17-slim as build
+
+# Set the working directory
 WORKDIR /app
 
-COPY target/*.war /usr/local/tomcat/webapps/
+# Install git
+RUN apt-get update && \
+    apt install git
 
+# Clone the repository
+RUN git clone https://github.com/RicardoMPires/SmartHomeDeployTest.git .
+
+# Copy the pom.xml file into the Docker image
+COPY pom.xml .
+
+# Download all required dependencies into one layer
+RUN mvn dependency:go-offline -B
+
+# Copy your source code into the Docker image
+COPY src ./src
+
+# Build the application
+RUN mvn clean package
+
+# Use Tomcat as the base image for the final stage
+FROM tomcat:10.1.24-jdk17-temurin-jammy
+
+# Remove the default Tomcat applications
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copy the built application from the build stage into the Tomcat image
+COPY --from=build /app/target/smarthome.war /usr/local/tomcat/webapps/
+
+# Expose port 8080
 EXPOSE 8080
+
+# Start Tomcat
 CMD ["catalina.sh", "run"]
