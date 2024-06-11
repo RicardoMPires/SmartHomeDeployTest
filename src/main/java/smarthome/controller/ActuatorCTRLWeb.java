@@ -24,6 +24,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/actuators")
+@CrossOrigin(origins = "*")
 public class ActuatorCTRLWeb {
 
     private final ActuatorService actuatorService;

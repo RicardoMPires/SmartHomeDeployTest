@@ -26,6 +26,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/rooms")
+@CrossOrigin(origins = "*")
 public class RoomCTRLWeb {
 
     private final RoomService roomService;

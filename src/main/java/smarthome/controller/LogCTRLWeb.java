@@ -30,6 +30,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping ("/logs")
+@CrossOrigin(origins = "*")
 public class LogCTRLWeb {
 
     private final LogService logService;
