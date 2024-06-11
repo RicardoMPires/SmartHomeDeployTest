@@ -1,0 +1,23 @@
+# Use an official Node.js runtime as the base image
+FROM node:slim
+
+# Set the working directory in the container to /app
+WORKDIR /app
+
+COPY src/main/webapp/package*.json ./
+
+# Install the application dependencies
+RUN npm install
+
+COPY src/main/webapp ./
+# Build the application
+RUN npm run build
+
+# Install serve to serve the application
+RUN npm install -g serve
+
+# Expose port 5000 for the application
+EXPOSE 5000
+
+# Start the application
+CMD ["serve", "-s", "build", "-l", "5000"]
