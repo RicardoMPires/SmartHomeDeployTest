@@ -10,7 +10,7 @@ export default function Devices() {
     const [devices, setDevices] = useState([]);
 
     useEffect(() => {
-        fetch(`http://10.9.24.206:8080/smarthome/devices?roomID=${roomId}`)
+        fetch(`${process.env.REACT_APP_BACKEND_API_URL}/smarthome/devices?roomID=${roomId}`)
             .then(response => response.json())
             .then(data => {
                 if (data._embedded && data._embedded.deviceDTOList) {

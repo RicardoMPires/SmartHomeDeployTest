@@ -11,7 +11,7 @@ export default function Room() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://web:8080/smarthome/house')
+        fetch(`${process.env.REACT_APP_BACKEND_API_URL}/smarthome/house`)
             .then(response => response.json())
             .then(data => {
                 if (data._embedded && data._embedded.roomDTOList) {

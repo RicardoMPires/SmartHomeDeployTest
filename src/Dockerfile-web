@@ -11,14 +11,8 @@ RUN apt-get update && \
 # Clone the repository
 RUN git clone https://github.com/RicardoMPires/SmartHomeDeployTest.git .
 
-# Copy the pom.xml file into the Docker image
-COPY pom.xml .
-
 # Download all required dependencies into one layer
 RUN mvn dependency:go-offline -B
-
-# Copy your source code into the Docker image
-COPY src ./src
 
 # Build the application
 RUN mvn clean package

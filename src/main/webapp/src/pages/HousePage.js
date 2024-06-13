@@ -7,7 +7,7 @@ const House = (props) => {
     const [houseState, setHouseState] = useState(null);
 
     useEffect(() => {
-        fetch('http://web:8080/smarthome/house')
+        fetch(`${process.env.REACT_APP_BACKEND_API_URL}/smarthome/house`)
             .then(response => response.json())
             .then(data => setHouseState(data))
             .catch(err => console.log(err))
